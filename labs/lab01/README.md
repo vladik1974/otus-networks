@@ -252,11 +252,11 @@ S1(config-vlan)#vlan 8
 S1(config-vlan)#name Native
 S1(config-vlan)#
 S1(config)#interface vlan 3
-S1(config-if)#ip address 192.168.3.11 255.255.255.0
+S1(config-if)#ip address 192.168.3.12 255.255.255.0
 S1(config-if)#no shutdown
 S1(config-if)#exit
 S1(config)#ip default-gateway 192.168.3.1
-S1(config)#interface range f0/1 - 2, f0/4, f0/6 - 14, f0/16 - 24, G0/1 - 2
+S1(config)#interface range f0/1 - 2, f0/4 - 14, f0/16 - 24, G0/1 - 2
 S1(config-if-range)#
 S1(config-if-range)#switchport mode access
 S1(config-if-range)#switchport access vlan 7
