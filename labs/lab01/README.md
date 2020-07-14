@@ -144,6 +144,15 @@
 ### Solution:
 #### Part 1: Build the Network and Configure Basic Device Settings
 
-      
-* **Step 1:  Complete the following tests from PC-A. All should be successful.**      
+Configuring basic settings for the router
+``` bash
+S2>enable
+S2#conf t
+S2(config)#vtp domain CCNA
+S2(config)#vtp mode server
+S2(config)#vtp password cisco
+S2(config)#exit
+S2#exit
+```
+
       
