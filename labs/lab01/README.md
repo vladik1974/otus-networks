@@ -49,12 +49,12 @@
 #### [Part 1: Build the Network and Configure Basic Device Settings ](README.md#part-1-build-the-network-and-configure-basic-device-settings)
 
 * Step 1: Cable the network as shown in the topology
-* Step 2: Configure basic settings for the router
+* **Step 2: Configure basic settings for the router**
 
-   a.  Console into the router and enable priviliged EXEC mode<br/>
-   b.  Enter configuration mode<br/>
-   c.  Enter configuration mode<br/>
-   d.
+    _a.  Console into the router and enable priviliged EXEC mode_<br/>
+    b.  Enter configuration mode<br/>
+    c.  Enter configuration mode<br/>
+    d.
    
    
 
