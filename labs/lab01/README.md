@@ -48,13 +48,14 @@
 ### Task:
 #### [Part 1: Build the Network and Configure Basic Device Settings ](README.md#part-1-build-the-network-and-configure-basic-device-settings)
 
+* Step 1: Cable the network as shown in the topology
+* Step 2: Configure basic settings for the router
+
+   a.  Console into the router and enable priviliged EXEC mode
+   b.  Enter configuration mode
+
 #### [Part 2: Create VLANs and Assign Switch Ports ](README.md#часть-2-настройка-динамического-протокола-транкинга-dtp)
 
 ### Solution:
 #### Part 1: Build the Network and Configure Basic Device Settings
 
-* Step 1: Cable the network as shown in the topology
-* Step 2: Configure basic settings for the router
-
-   a.  Console into the router and enable priviliged EXEC mode
-      
