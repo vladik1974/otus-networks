@@ -81,7 +81,7 @@
      _Refer to the Addressing Table for PC host address information._     
    
 
-#### [Part 2: Create VLANs and Assign Switch Ports ](README.md#часть-2-настройка-динамического-протокола-транкинга-dtp)
+#### [Part 2: Create VLANs and Assign Switch Ports ](README.md#part-2-create-vlans-and-assign-switch-ports)
    In Part 2, you will create VLANs, as specified in the table above, on both switches. You will then assign the VLANs to the appropriate interface. The show vlan command is          used to verify your configuration settings. Complete the following tasks on each switch
 * **Step 1: Create VLANs on both switches.**  
 
@@ -97,7 +97,7 @@
           static access mode. Be sure to do this on both switches
       b.  Issue the show vlan brief command and verify that the VLANs are assigned to the correct interfaces.
       
-#### [Part 3:  Configure an 802.1Q Trunk Between the Switches ](README.md#часть-2-настройка-динамического-протокола-транкинга-dtp)
+#### [Part 3:  Configure an 802.1Q Trunk Between the Switches ](README.md#part-3-configure-an-8021q-trunk-between-the-switches)
   In Part 3, you will manually configure interface F0/3 as a trunk.
   
 * **Step 1:  Manually configure trunk interface F0/3.** 
@@ -116,7 +116,7 @@
       c.  Issue the show interfaces trunk command to verify trunking.
              Why does F0/5 not appear in the list of trunks?
              
-#### [Part 4:  Configure Inter-VLAN Routing on the Router ](README.md#часть-2-настройка-динамического-протокола-транкинга-dtp) 
+#### [Part 4:  Configure Inter-VLAN Routing on the Router ](README.md#part-4-configuring-inter-vlan-routing-on-the-router) 
 
       a.  Activate interface G0/1 on the router.
       
@@ -126,7 +126,7 @@
           
       c.  Use the show ip interface brief command to verify the sub-interfaces are operational. 
       
- #### [Part 5: Verify Inter-VLAN Routing is Working ](README.md#часть-2-настройка-динамического-протокола-транкинга-dtp) 
+ #### [Part 5: Verify Inter-VLAN Routing is Working ](README.md#part-5-verify-inter-vlan-routing-is-working) 
  
 * **Step 1:  Complete the following tests from PC-A. All should be successful.**
 
