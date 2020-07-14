@@ -77,7 +77,8 @@
       j.  Save the running configuration to the startup configuration file.
       k.  Set the clock on the switch
       
-* **Step 4:  Configure PC hosts.**        
+* **Step 4:  Configure PC hosts.**   
+  Refer to the Addressing Table for PC host address information.     
    
 
 #### [Part 2: Create VLANs and Assign Switch Ports ](README.md#часть-2-настройка-динамического-протокола-транкинга-dtp)
