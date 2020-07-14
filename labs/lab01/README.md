@@ -78,7 +78,7 @@
       k.  Set the clock on the switch
       
 * **Step 4:  Configure PC hosts.**   
-  Refer to the Addressing Table for PC host address information.     
+     _Refer to the Addressing Table for PC host address information._     
    
 
 #### [Part 2: Create VLANs and Assign Switch Ports ](README.md#часть-2-настройка-динамического-протокола-транкинга-dtp)
