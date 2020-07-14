@@ -437,3 +437,40 @@ Serial0/0/0                unassigned      YES unset  administratively down down
 Serial0/0/1                unassigned      YES unset  administratively down down    
 R1#
 ```
+#### Part 5: Verify Inter-VLAN Routing is Working
+
+* **Step 1: Connectivity tests from PC-S1.**<br />
+
+Ping from PC-S1 to its default gateway:
+  
+``` bash
+C:\Users\student>ping 192.168.3.1
+
+Pinging 192.168.3.1 with 32 bytes of data:
+Reply from 192.168.3.1: bytes=32 time<1ms TTL=255
+Reply from 192.168.3.1: bytes=32 time<1ms TTL=255
+Reply from 192.168.3.1: bytes=32 time<1ms TTL=255
+Reply from 192.168.3.1: bytes=32 time<1ms TTL=255
+
+Ping statistics for 192.168.3.1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+ ``` 
+Ping from PC-S1 to PC-S2:
+``` bash
+C:\Users\student>ping 192.168.4.3
+
+Pinging 192.168.4.3 with 32 bytes of data:
+Reply from 192.168.4.3: bytes=32 time<1ms TTL=127
+Reply from 192.168.4.3: bytes=32 time<1ms TTL=127
+Reply from 192.168.4.3: bytes=32 time<1ms TTL=127
+Reply from 192.168.4.3: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.4.3:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+```
