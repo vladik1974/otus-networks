@@ -396,3 +396,44 @@ S2#
 As we can see, interface F0/5 does not appear in the list of trunks, since  interface Gi0/1 on R1 is deactivated by default,
 so the trunk has not been established yet
  
+#### Part 4: Configuring Inter-VLAN Routing on the Router
+
+  Activating interface Gi0/1 on the router:
+ ``` bash
+ R1(config)# interface GigabitEthernet0/1
+R1(config-if)#description Trunk link to S1
+R1(config-if)#no ip address
+R1(config-if)#no shutdown
+
+  ```
+ Configuring sub-interfaces for each VLAN as specified in the IP addressing table:
+``` bash
+R1(config-if)#interface GigabitEthernet0/1.3
+R1(config-subif)#description Default Gateway for VLAN 3
+R1(config-subif)#encapsulation dot1Q 3
+R1(config-subif)#ip address 192.168.3.1 255.255.255.0
+R1(config-subif)#
+R1(config-subif)#interface GigabitEthernet0/1.4
+R1(config-subif)#description Default Gateway for VLAN 4
+R1(config-subif)# encapsulation dot1Q 4
+R1(config-subif)#ip address 192.168.4.1 255.255.255.0
+R1(config-subif)#
+R1(config-subif)#interface GigabitEthernet0/1.8
+R1(config-subif)# description Native VLAN 8
+R1(config-subif)#encapsulation dot1Q 8 native
+R1(config-subif)#no ip address 
+R1(config-subif)#
+```
+Verifying the sub-interfaces are operational:
+``` bash
+R1#show ip interface brief
+Interface                  IP-Address      OK? Method Status                Protocol
+GigabitEthernet0/0         unassigned      YES unset  administratively down down    
+GigabitEthernet0/1         unassigned      YES manual up                    up      
+GigabitEthernet0/1.3       192.168.3.1     YES manual up                    up      
+GigabitEthernet0/1.4       192.168.4.1     YES manual up                    up      
+GigabitEthernet0/1.8       unassigned      YES manual up                    up      
+Serial0/0/0                unassigned      YES unset  administratively down down    
+Serial0/0/1                unassigned      YES unset  administratively down down    
+R1#
+```
