@@ -50,11 +50,10 @@
 
 * Step 1: Cable the network as shown in the topology
 * **Step 2: Configure basic settings for the router**
-
-    _a.  Console into the router and enable priviliged EXEC mode_<br/>
-    b.  Enter configuration mode<br/>
-    c.  Enter configuration mode<br/>
-    d.
+      _a.  Console into the router and enable priviliged EXEC mode_<br/>
+      _b.  Enter configuration mode_<br/>
+      _c.  Enter configuration mode_<br/>
+      _d.
    
    
 
