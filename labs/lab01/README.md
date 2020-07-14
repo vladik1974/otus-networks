@@ -23,9 +23,9 @@
 | PC-S2   | NIC       | 192.168.4.3  | 255.255.255.0 | 192.168.4.1     |
 
 
-- | VLAN |    Name    |                     Interface Assigned                      |
-  | ---- | :--------: | :---------------------------------------------------------: |
-  | 3    | Management | S1: VLAN 3  S2: VLAN 3  S1: F0/6               |
-  | 4    | Operations | S2: F0/18                          |
-  | 7    | ParkingLot | S1: F0/2-4, F0/7-24, G0/1-2   S2: F0/2-17, F0/19-24, G0/1-2 |
-  | 8    |   Native   |                             N/A                             |
+| VLAN |    Name    |                     Interface Assigned                      |
+| ---- | :--------: | :---------------------------------------------------------: |
+| 3    | Management | :S1: VLAN 3  S2: VLAN 3  S1: F0/6               |
+| 4    | Operations | :S2: F0/18                          |
+| 7    | ParkingLot | :S1: F0/2-4, F0/7-24, G0/1-2   S2: F0/2-17, F0/19-24, G0/1-2 |
+| 8    |   Native   |                             N/A                             |
