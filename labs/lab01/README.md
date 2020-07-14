@@ -96,6 +96,35 @@
       a.  Assign used ports to the appropriate VLAN (specified in the VLAN table above) and configure them for
           static access mode. Be sure to do this on both switches
       b.  Issue the show vlan brief command and verify that the VLANs are assigned to the correct interfaces.
+      
+#### [Part 3:  Configure an 802.1Q Trunk Between the Switches ](README.md#часть-2-настройка-динамического-протокола-транкинга-dtp)
+  In Part 3, you will manually configure interface F0/3 as a trunk.
+  
+* **Step 1:  Manually configure trunk interface F0/3.** 
+
+      a.  Change the switchport mode on interface F0/3 to force trunking. Make sure to do this on both switches.
+      b.  As a part of the trunk configuration, set the native VLAN to 8 on both switches. You may see error messages
+          temporarily while the two interfaces are configured for different native VLANs.
+      c.  As another part of trunk configuration, specify that VLANs 3, 4, and 8 are only allowed to cross the trunk
+      d.  Issue the show interfaces trunk command to verify trunking ports, the Native VLAN and allowed VLANs
+          across the trunk.
+          
+* **Step 2:  Manually configure S1’s trunk interface F0/5.** 
+
+      a.  Configure the F0/5 on S1 with the same trunk parameters as F0/3. This is the trunk to the router
+      b.  Save the running configuration to the startup configuration file on S1 and S2
+      c.  Issue the show interfaces trunk command to verify trunking.
+             Why does F0/5 not appear in the list of trunks?
+             
+#### [Part 4:  Configure Inter-VLAN Routing on the Router ](README.md#часть-2-настройка-динамического-протокола-транкинга-dtp) 
+
+      a.  Activate interface G0/1 on the router.
+      
+      b.  Configure sub-interfaces for each VLAN as specified in the IP addressing table. All sub-interfaces use
+          802.1Q encapsulation. Ensure the sub-interface for the native VLAN does not have an IP address
+          assigned. Include a description for each sub-interface.
+          
+      c.  Use the show ip interface brief command to verify the sub-interfaces are operational. 
 
 ### Solution:
 #### Part 1: Build the Network and Configure Basic Device Settings
