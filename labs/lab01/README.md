@@ -214,7 +214,7 @@ S1#
       
 #### Part 2: Create VLANs and Assign Switch Ports
 
-* **Step 1: Create VLANs on both switches.** 
+* **Step 1: Create VLANs on both switches.**<br /> 
   S1: 
 ``` bash
 S1(config)#vlan 3
