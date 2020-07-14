@@ -125,7 +125,25 @@
           assigned. Include a description for each sub-interface.
           
       c.  Use the show ip interface brief command to verify the sub-interfaces are operational. 
+      
+ #### [Part 5: Verify Inter-VLAN Routing is Working ](README.md#часть-2-настройка-динамического-протокола-транкинга-dtp) 
+ 
+* **Step 1:  Complete the following tests from PC-A. All should be successful.**
 
+      a.  Ping from PC-S1 to its default gateway.
+      b.  Ping from PC-S1 to PC-S2
+      c.  Ping from PC-S1 to S2
+      
+* **Step 2:  Complete the following test from PC-B.**     
+
+      From the command prompt on PC-B, issue the tracert command to the address of PC-A.
+      Question:
+        What intermediate IP addresses are shown in the results?
+
+      
 ### Solution:
 #### Part 1: Build the Network and Configure Basic Device Settings
 
+      
+* **Step 1:  Complete the following tests from PC-A. All should be successful.**      
+      
