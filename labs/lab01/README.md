@@ -55,6 +55,7 @@
    b.  Enter configuration mode
    c.  Enter configuration mode
    
+   
 
 #### [Part 2: Create VLANs and Assign Switch Ports ](README.md#часть-2-настройка-динамического-протокола-транкинга-dtp)
 
