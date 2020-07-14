@@ -146,13 +146,36 @@
 
 Configuring basic settings for the router
 ``` bash
-S2>enable
-S2#conf t
-S2(config)#vtp domain CCNA
-S2(config)#vtp mode server
-S2(config)#vtp password cisco
-S2(config)#exit
-S2#exit
+Router>enable
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#hostname R1
+R1(config)#no ip domain-lookup 
+R1(config)#enable secret class
+R1(config)#line console 0
+R1(config-line)#password cisco
+R1(config-line)#login
+R1(config-line)#line vty 0 15
+R1(config-line)#password cisco
+R1(config-line)#login
+R1(config-line)#exit
+R1(config)#service password-encryption 
+R1(config)#banner login #Unauthorized access is prohibited!!!# 
+R1(config# do copy running-config startup-config
+Destination filename [startup-config]? 
+Building configuration...
+[OK] 
+R1(config)#clock timezone IST 3
+
+*Jul 14 11:29:48.115: %SYS-6-CLOCKUPDATE: System clock has been updated from 11:29:48 UTC Tue Jul 14 2020 to 14:29:48 IST Tue Jul 14 2020, configured from console by console.
+R1(config)#exit
+R1#
+*Jul 14 11:30:07.035: %SYS-5-CONFIG_I: Configured from console by console   
+R1#clock set 14:30:00 Jul 14 2020
+R1#
+*Jul 14 11:30:00.000: %SYS-6-CLOCKUPDATE: System clock has been updated from 14:30:46 IST Tue Jul 14 2020 to 14:30:00 IST Tue Jul 14 2020, configured from console by console.
+R1#clock update-calendar 
+R1#
 ```
 
       
