@@ -371,4 +371,28 @@ Fa0/3       3-4,8
 S2#
  ```
  
+* **Step 2:  Manually configure S1’s trunk interface F0/5.**<br />
+``` bash 
+S1(config)#interface FastEthernet 0/5
+S1(config-if)#description Trunk link to R1
+S1(config-if)#switchport mode trunk
+S1(config-if)#switchport trunk native vlan 8
+S1(config-if)#switchport trunk allowed vlan 3,4,8
+S1(config-if)#
+```
+Issue the **show interfaces trunk** command to verify trunking.
+ ``` bash 
+S2#show interfaces trunk
+Port        Mode         Encapsulation  Status        Native vlan
+Fa0/3       on           802.1q         trunking      8
+Port      Vlans allowed on trunk
+Fa0/3       3-4,8
+Port        Vlans allowed and active in management domain
+Fa0/3       3-4,8
+Port        Vlans in spanning tree forwarding state and not pruned
+Fa0/3       3-4,8
+S2#
+ ```
+As we can see, interface F0/5 does not appear in the list of trunks, since  interface Gi0/1 on R1 is deactivated by default,
+so the trunk has not been established yet
  
