@@ -319,3 +319,56 @@ VLAN Name                             Status    Ports
                                                 Fa0/23, Fa0/24, Gi0/1, Gi0/2
 8    Native                           active    
 ```
+
+#### Part 3: Configure an 802.1Q Trunk Between the Switches
+
+* **Step 1:  Manually configure trunk interface F0/3.**<br />
+
+  S1:
+``` bash
+S1(config)#interface FastEthernet 0/3
+S1(config-if)# description Trunk link to S2
+S1(config-if)# switchport mode trunk
+S1(config-if)# switchport trunk native vlan 8
+S1(config-if)# switchport trunk allowed vlan 3,4,8
+
+```
+
+  S2:
+``` bash
+S1(config)#interface FastEthernet 0/3
+S1(config-if)# description Trunk link to S1
+S1(config-if)# switchport mode trunk
+S1(config-if)# switchport trunk native vlan 8
+S1(config-if)# switchport trunk allowed vlan 3,4,8
+
+```
+
+   Verify trunking ports, the Native VLAN and allowed VLANs across the trunk.
+   ``` bash
+   S1#show interfaces trunk
+Port        Mode             Encapsulation  Status        Native vlan
+Fa0/3       on               802.1q         trunking      8
+Port        Vlans allowed on trunk
+Fa0/3       3-4,8
+Port        Vlans allowed and active in management domain
+Fa0/3       3-4,8
+Port        Vlans in spanning tree forwarding state and not pruned
+Fa0/3       3-4,8
+   ```
+   
+   
+ ``` bash 
+S2#show interfaces trunk
+Port        Mode         Encapsulation  Status        Native vlan
+Fa0/3       on           802.1q         trunking      8
+Port      Vlans allowed on trunk
+Fa0/3       3-4,8
+Port        Vlans allowed and active in management domain
+Fa0/3       3-4,8
+Port        Vlans in spanning tree forwarding state and not pruned
+Fa0/3       3-4,8
+S2#
+ ```
+ 
+ 
