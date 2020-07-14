@@ -8,4 +8,4 @@
 
 ### Logical network topology diagram
 
-![](logical_network_topology.jpeg)
+![](logical_network_topology.jpg)
