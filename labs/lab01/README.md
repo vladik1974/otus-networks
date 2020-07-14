@@ -55,7 +55,14 @@
       b.  Enter configuration mode
       c.  Assign a device name to the router
       d.  Disable DNS lookup to prevent the router from attempting to translate incorrectly entered commands as though they were host names.
-      e.  Assign **class** as the privileged EXEC encrypted password
+      e.  Assign class as the privileged EXEC encrypted password
+      f.  Assign cisco as the console password and enable login
+      g.  Assign cisco as the VTY password and enable login
+      h.  Encrypt the plaintext passwords.
+      i.  Create a banner that warns anyone accessing the device that unauthorized access is prohibited
+      j.  Save the running configuration to the startup configuration file.
+      k.  Set the clock on the router
+      
    
    
 
