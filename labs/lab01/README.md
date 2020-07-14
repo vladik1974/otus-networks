@@ -63,7 +63,19 @@
       j.  Save the running configuration to the startup configuration file.
       k.  Set the clock on the router
       
- * **Step 3: Step 3: Configure basic settings for each switch.**  
+* **Step 3: Configure basic settings for each switch.**  
+ 
+      a.  Console into the switch and enable priviliged EXEC mode
+      b.  Enter configuration mode
+      c.  Assign a device name to the switch
+      d.  Disable DNS lookup to prevent the switch from attempting to translate incorrectly entered commands as though they were host names.
+      e.  Assign class as the privileged EXEC encrypted password
+      f.  Assign cisco as the console password and enable login
+      g.  Assign cisco as the VTY password and enable login
+      h.  Encrypt the plaintext passwords.
+      i.  Create a banner that warns anyone accessing the device that unauthorized access is prohibited
+      j.  Save the running configuration to the startup configuration file.
+      k.  Set the clock on the switch
    
 
 #### [Part 2: Create VLANs and Assign Switch Ports ](README.md#часть-2-настройка-динамического-протокола-транкинга-dtp)
