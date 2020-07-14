@@ -474,3 +474,33 @@ Approximate round trip times in milli-seconds:
     Minimum = 0ms, Maximum = 0ms, Average = 0ms
 
 ```
+Ping from PC-S1 to S2:
+``` bash
+C:\Users\student>ping 192.168.3.12
+
+Pinging 192.168.3.12 with 32 bytes of data:
+Reply from 192.168.3.12: bytes=32 time<1ms TTL=255
+Reply from 192.168.3.12: bytes=32 time<1ms TTL=255
+Reply from 192.168.3.12: bytes=32 time<1ms TTL=255
+Reply from 192.168.3.12: bytes=32 time<1ms TTL=255
+
+Ping statistics for 192.168.3.12:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 1ms, Maximum = 1ms, Average = 1ms
+```
+* **Step 2: Connectivity tests from PC-S2.**<br />
+
+Issuing the **tracert** command to the address of PC-S1
+``` bash
+C:\Users\Vlad>tracert 192.168.3.3
+
+Tracing route to CCNA-RS-PC04 [192.168.3.3]
+over a maximum of 30 hops:
+
+  1    <1 ms    <1 ms    <1 ms  192.168.4.1
+  2    <1 ms    <1 ms    <1 ms  CCNA-RS-PC04 [192.168.3.3]
+
+Trace complete.
+```
+The intermediate IP address  shown in the results, is **192.168.4.1**, that is the default gateway for VLAN 4 
