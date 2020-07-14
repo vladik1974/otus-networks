@@ -48,5 +48,7 @@
 ### Task:
 #### [Part 1: Build the Network and Configure Basic Device Settings ](README.md#часть-1-настройка-vtp)
 
-### Решение:
-#### Часть 1: Настройка VTP
+#### [Part 2: Create VLANs and Assign Switch Ports ](README.md#часть-2-настройка-динамического-протокола-транкинга-dtp)
+
+### Solution:
+#### Part 1: Build the Network and Configure Basic Device Settings
