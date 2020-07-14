@@ -48,3 +48,5 @@
 ### Task:
 #### [Part 1: Build the Network and Configure Basic Device Settings ](README.md#часть-1-настройка-vtp)
 
+### Решение:
+#### Часть 1: Настройка VTP
