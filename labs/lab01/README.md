@@ -52,3 +52,9 @@
 
 ### Solution:
 #### Part 1: Build the Network and Configure Basic Device Settings
+
+* Step 1: Cable the network as shown in the topology
+* Step 2: Configure basic settings for the router
+
+   a.  Console into the router and enable priviliged EXEC mode
+      
