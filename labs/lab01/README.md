@@ -26,7 +26,7 @@
 ### VLAN Table
 | VLAN |    Name    | Interface Assigned                               |
 | ---- | :--------: | :----------------------------------------------- |
-| 3    | Management | **S1**: VLAN 3 <br />  S2: VLAN 3  <br />  S1: F0/15 |
-| 4    | Operations | **S2**: F0/18                                        |
+| 3    | Management | **S1**: VLAN 3 <br />  **S2**: VLAN 3  <br />  **S1**: F0/15 |
+| 4    | Operations | **S2**: F0/15                                        |
 | 7    | ParkingLot | **S1**: F0/1-2, F0/4, F0/6-14, F0/16-24, G0/1-2<br/>  **S2**: F0/1-2,  F0/4-14, F0/16-24, G0/1-2      |
 | 8    |   Native   | N/A                                              |
