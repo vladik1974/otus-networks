@@ -63,7 +63,7 @@
       j.  Save the running configuration to the startup configuration file.
       k.  Set the clock on the router
       
-   
+ * **Step 3: Step 3: Configure basic settings for each switch.**  
    
 
 #### [Part 2: Create VLANs and Assign Switch Ports ](README.md#часть-2-настройка-динамического-протокола-транкинга-dtp)
