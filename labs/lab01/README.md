@@ -178,4 +178,37 @@ R1#clock update-calendar
 R1#
 ```
 
+Configuring basic settings for both switches (example for S1 shown bellow):
+``` bash
+Switch>enable
+Switch#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#hostname S1
+S1(config)#no ip domain-lookup 
+S1(config)#enable secret class
+S1(config)#line console 0
+S1(config-line)#password cisco
+S1(config-line)#login
+S1(config-line)#line vty 0 15
+S1(config-line)#password cisco
+S1(config-line)#login
+S1(config-line)#exit
+S1(config)#service password-encryption 
+S1(config)#banner login #Unauthorized access is prohibited!!!# 
+S1(config# do copy running-config startup-config
+Destination filename [startup-config]? 
+Building configuration...
+[OK] 
+S1(config)#clock timezone IST 3
+
+*Jul 14 11:29:48.115: %SYS-6-CLOCKUPDATE: System clock has been updated from 11:29:48 UTC Tue Jul 14 2020 to 14:29:48 IST Tue Jul 14 2020, configured from console by console.
+S1(config)#exit
+S1#
+*Jul 14 11:30:07.035: %SYS-5-CONFIG_I: Configured from console by console   
+S1#clock set 14:30:00 Jul 14 2020
+R1#
+*Jul 14 11:30:00.000: %SYS-6-CLOCKUPDATE: System clock has been updated from 14:30:46 IST Tue Jul 14 2020 to 14:30:00 IST Tue Jul 14 2020, configured from console by console.
+
+S1#
+```
       
