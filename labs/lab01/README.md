@@ -30,3 +30,15 @@
 | 4    | Operations | **S2**: F0/15                                        |
 | 7    | ParkingLot | **S1**: F0/1-2, F0/4, F0/6-14, F0/16-24, G0/1-2<br/>  **S2**: F0/1-2,  F0/4-14, F0/16-24, G0/1-2      |
 | 8    |   Native   | N/A                                              |
+
+# Objectives
+
+​         **Part 1: Build the Network and Configure Basic Device Settings**
+
+​         **Part 2: Create VLANs and Assign Switch Ports**
+
+​         **Part 3: Configure an 802.1Q Trunk between the Switches**
+
+​         **Part 4: Configure Inter-VLAN Routing on the Router**
+
+​         **Part 5: Verify Inter-VLAN Routing is working**
