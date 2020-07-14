@@ -54,6 +54,7 @@
    a.  Console into the router and enable priviliged EXEC mode
    b.  Enter configuration mode
    c.  Enter configuration mode
+   d.
    
    
 
