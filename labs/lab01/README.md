@@ -43,3 +43,8 @@
 ​*         **Part 4: Configure Inter-VLAN Routing on the Router**
 
 ​*         **Part 5: Verify Inter-VLAN Routing is working**
+
+
+### Task:
+#### [Part 1: Build the Network and Configure Basic Device Settings ](README.md#часть-1-настройка-vtp)
+
