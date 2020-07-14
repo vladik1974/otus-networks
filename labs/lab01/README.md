@@ -82,6 +82,20 @@
    
 
 #### [Part 2: Create VLANs and Assign Switch Ports ](README.md#часть-2-настройка-динамического-протокола-транкинга-dtp)
+   In Part 2, you will create VLANs, as specified in the table above, on both switches. You will then assign the VLANs to the appropriate interface. The show vlan command is          used to verify your configuration settings. Complete the following tasks on each switch
+* **Step 1: Create VLANs on both switches.**  
+
+      a.  Create and name the required VLANs on each switch from the table above.
+      b.  Configure the management interface and default gateway on each switch using the IP address
+          information in the Addressing Table. 
+      c.  Assign all unused ports on both switches to the ParkingLot VLAN, configure them for static access mode,
+          and administratively deactivate them.
+
+* **Step 2:  Assign VLANs to the correct switch interfaces..**   
+
+      a.  Assign used ports to the appropriate VLAN (specified in the VLAN table above) and configure them for
+          static access mode. Be sure to do this on both switches
+      b.  Issue the show vlan brief command and verify that the VLANs are assigned to the correct interfaces.
 
 ### Solution:
 #### Part 1: Build the Network and Configure Basic Device Settings
