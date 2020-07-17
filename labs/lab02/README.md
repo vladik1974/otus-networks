@@ -218,17 +218,17 @@ Which ports are the root ports on the switches?
 > On S3 - f0/4
 
 Which ports are the designated ports on the switches? 
-> Ports used for data transfer are designated Desg Fwd (designated forward) 
+> Ports used for data transfer are designated Desg Fwd (designated forward)<br/> 
 These are f0/2 and f0/4 on S1, and f0/2 on S3
 
 What port is showing as an alternate port and is currently being blocked? 
-> Порт e0/1 коммутатора S3.
+> Port f0/2 on switch S2.
 
 Why did spanning tree select this port as the non-designated (blocked) port?
-> После того, как выбран root bridge, S2 и S3 продолжут отправлять BPDU-пакеты от root bridge через все порты, кроме корневых (root fwd), изменив в них значения на свои (bringe id, port id,root path cost)
+> After the root bridge is selected, S2 and S3 will continue to forward BPDU packets from the root bridge through all ports except the root (root fwd), changing the values in them to their own (bridge id, port id, root path cost)
 > 
->Получив пакеты BPDU друг от друга, увидели в них одинаковые значения root bridge, коммутаторы поймут, что есть избыточность (петля) и нужно заблокировать один из портов.
-Далее, нужно выбрать на каком из коммутаторов блокировать порт. Выбор происходит по трём критериям (лучшее значение наименьшее):
+>After receiving the BPDU packets from each other, and saw the same root bridge values in them, the switches will understand that there is redundancy (a loop) and one of the ports needs to be blocked.
+Next, yit's needed to choose on which of the switches to block the port. The choice is made according to three criteria (the best value is the lowest)
 > - Root Path Cost.
 > - Bridge ID.
 > - Port ID.
