@@ -233,63 +233,60 @@ Next, yit's needed to choose on which of the switches to block the port. The cho
 > - Bridge ID.
 > - Port ID.
 >
->Побеждает S2, т.к. у него меньший bridge id, соответственно порт e0/1 у S3 перестаёт отправлять любые пакеты и переходит в режит прослушивания BPDU пакетов от S2, т.е. переходит в режим blocked.
+>S3 wins because it has a lowest bridge id, accordingly, the f0/2 port of S2 stops sending any packets and switches to listening mode for BPDU packets from S3, i.e. goes into blocked mode.
 
 #### Part 3:	Observe STP Port Selection Based on Port Cost
 
 *Step 1:	Locate the switch with the blocked port.
 
 ``` bash
-S2#sh spann
-
+S2#show spanning-tree 
 VLAN0001
   Spanning tree enabled protocol ieee
   Root ID    Priority    32769
-             Address     aabb.cc00.1000
-             Cost        100
-             Port        2 (Ethernet0/1)
+             Address     0008.302d.4580
+             Cost        19
+             Port        4 (FastEthernet0/4)
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-
   Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
-             Address     aabb.cc00.2000
+             Address     0015.fac1.4500
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-             Aging Time  300 sec
-
-Interface           Role Sts Cost      Prio.Nbr Type
-------------------- ---- --- --------- -------- --------------------------------
-Et0/1               Root FWD 100       128.2    Shr
-Et0/3               Desg FWD 100       128.4    Shr
+             Aging Time 300
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/2            Altn BLK 19        128.2    P2p 
+Fa0/4            Root FWD 19        128.4    P2p 
+S2#
 ```
 ``` bash
-S3#sh spann
-
+S3#show spanning-tree 
 VLAN0001
   Spanning tree enabled protocol ieee
   Root ID    Priority    32769
-             Address     aabb.cc00.1000
-             Cost        100
-             Port        4 (Ethernet0/3)
+             Address     0008.302d.4580
+             Cost        19
+             Port        4 (FastEthernet0/4)
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-
   Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
-             Address     aabb.cc00.3000
+             Address     0011.2142.4580
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-             Aging Time  300 sec
-
-Interface           Role Sts Cost      Prio.Nbr Type
-------------------- ---- --- --------- -------- --------------------------------
-Et0/1               Altn BLK 100       128.2    Shr
-Et0/3               Root FWD 100       128.4    Shr
+             Aging Time 300
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/2            Desg FWD 19        128.2    P2p 
+Fa0/4            Root FWD 19        128.4    P2p 
+S3#
 ```
-Заблокирован порт e0/1 на S3.
+The blocked port is  Fa0/2  on S2.
 
 *Step 2:	Change port cost.*
-
+In addition to the blocked port, the only other active port on  switch S2 is the port designated as the root port.
 Lower the cost of this root port to 18 by issuing the *spanning-tree cost 18* interface configuration mode command.
 ``` bash
-S3#conf t
-S3(config)#int e0/3
-S3(config-if)#spanning-tree cost 18
+S2#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+S2(config)#interface f0/4
+S2(config-if)#spanning-tree cost 18
 ```
 *Step 3:	Observe spanning tree changes.*
 
@@ -297,108 +294,103 @@ Re-issuing the show spanning-tree command on both non-root switches.
 
 Switch S2
 ``` bash
-S2#sh spann
-
+S2#show spanning-tree
 VLAN0001
   Spanning tree enabled protocol ieee
   Root ID    Priority    32769
-             Address     aabb.cc00.1000
-             Cost        100
-             Port        2 (Ethernet0/1)
+             Address     0008.302d.4580
+             Cost        18
+             Port        4 (FastEthernet0/4)
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-
   Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
-             Address     aabb.cc00.2000
+             Address     0015.fac1.4500
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-             Aging Time  300 sec
-
-Interface           Role Sts Cost      Prio.Nbr Type
-------------------- ---- --- --------- -------- --------------------------------
-Et0/1               Root FWD 100       128.2    Shr
-Et0/3               Altn BLK 100       128.4    Shr
+             Aging Time 15 
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/2            Desg FWD 19        128.2    P2p 
+Fa0/4            Root FWD 18        128.4    P2p 
+S2#
 ```
+
 Switch S3
 ``` bash
-S3#sh spann
-
+S3#show spanning-tree 
 VLAN0001
   Spanning tree enabled protocol ieee
   Root ID    Priority    32769
-             Address     aabb.cc00.1000
-             Cost        90
-             Port        4 (Ethernet0/3)
+             Address     0008.302d.4580
+             Cost        19
+             Port        4 (FastEthernet0/4)
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-
   Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
-             Address     aabb.cc00.3000
+             Address     0011.2142.4580
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-             Aging Time  300 sec
-
-Interface           Role Sts Cost      Prio.Nbr Type
-------------------- ---- --- --------- -------- --------------------------------
-Et0/1               Desg FWD 100       128.2    Shr
-Et0/3               Root FWD 90        128.4    Shr
+             Aging Time 300
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/2            Altn BLK 19        128.2    P2p 
+Fa0/4            Root FWD 19        128.4    P2p 
+S3#
 ```
-Теперь STP блокирует порт e0/3 на S2, а e0/1 на S3 перешёл в состояние Desg Fwd.
+Now the STP blocks the port Fa0/2 on S3, and Fa0/2 on S2 switches to Desg Fwd state.
 
-Почему протокол spanning-tree заменяет ранее заблокированный порт на назначенный порт и блокирует порт, который был назначенным портом на другом коммутаторе?
-> Приоритет стоимости пути (Root Path Cost) имеет бОльший приоритет относительно SID и Port ID.
+Why did spanning tree change the previously blocked port to a designated port, and block the port that was a designated port on the other switch?
+> Root Path Cost takes precedence over SID and Port ID.
 
 *Step 4:	Remove port cost changes.*
 
 * Issue the _no spanning-tree cost 18_ interface configuration mode command to remove the cost statement that has been created earlier.
 ``` bash
-S3#conf t
-S3(config)#interface e0/1
-S3(config-if)#no spanning-tree cost 18
+S2#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+S2(config)#int f0/4
+S2(config-if)#no spanning-tree cost 18
+S2(config-if)#end
 ```
 
-* Повторно выполнить команду _show spanning-tree_, чтобы подтвердить, что протокол STP сбросил порт на коммутаторе некорневого моста, вернув исходные настройки порта.
+* Re-issue the show spanning-tree command to verify that STP has reset the port on the non-root switches back to the original port settings.
 
-Коммутатор S2
+Switch S2
 ``` bash
-S2#sh spann
-
+S2#show spanning-tree
 VLAN0001
   Spanning tree enabled protocol ieee
   Root ID    Priority    32769
-             Address     aabb.cc00.1000
-             Cost        100
-             Port        2 (Ethernet0/1)
+             Address     0008.302d.4580
+             Cost        19
+             Port        4 (FastEthernet0/4)
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-
   Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
-             Address     aabb.cc00.2000
+             Address     0015.fac1.4500
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-             Aging Time  300 sec
-
-Interface           Role Sts Cost      Prio.Nbr Type
-------------------- ---- --- --------- -------- --------------------------------
-Et0/1               Root FWD 100       128.2    Shr
-Et0/3               Desg FWD 100       128.4    Shr
+             Aging Time 15 
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/2            Altn BLK 19        128.2    P2p 
+Fa0/4            Root FWD 19        128.4    P2p 
+S2#
 ```
 
-Коммутатор S3
+Switch S3
 ``` bash
-S3#sh spann
-
+S3#show spanning-tree 
 VLAN0001
   Spanning tree enabled protocol ieee
   Root ID    Priority    32769
-             Address     aabb.cc00.1000
-             Cost        100
-             Port        4 (Ethernet0/3)
+             Address     0008.302d.4580
+             Cost        19
+             Port        4 (FastEthernet0/4)
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-
   Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
-             Address     aabb.cc00.3000
+             Address     0011.2142.4580
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-             Aging Time  300 sec
-
-Interface           Role Sts Cost      Prio.Nbr Type
-------------------- ---- --- --------- -------- --------------------------------
-Et0/1               Altn BLK 100       128.2    Shr
-Et0/3               Root FWD 100       128.4    Shr
+             Aging Time 300
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/2            Desg FWD 19        128.2    P2p 
+Fa0/4            Root FWD 19        128.4    P2p 
+S3#
 ```
 
 #### Часть 4. Наблюдение за процессом выбора протоколом STP порта, исходя из приоритета портов
