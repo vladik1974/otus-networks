@@ -127,83 +127,77 @@ S1(config-if-range)#no shutdown
 ```
 Verifying ports activation
 ``` bash
-S1#show interface status
+S1#show interfaces status
 ```
 ``` bash
+
 Port      Name               Status       Vlan       Duplex  Speed Type
-Et0/0                        disabled     1            auto   auto unknown
-Et0/1                        connected    trunk        auto   auto unknown
-Et0/2                        disabled     1            auto   auto unknown
-Et0/3                        connected    trunk        auto   auto unknown
+Fa0/1                        disabled     1            auto   auto 10/100BaseTX
+Fa0/2                        connected    trunk      a-full  a-100 10/100BaseTX
+Fa0/3                        disabled     1            auto   auto 10/100BaseTX
+Fa0/4                        connected    trunk      a-full  a-100 10/100BaseTX
 ```
 *Step 4: Display spanning tree information.*
 
 Switch S1
 ``` bash
-S1#show spanning-tree
-
+S1# show spanning-tree 
 VLAN0001
   Spanning tree enabled protocol ieee
   Root ID    Priority    32769
-             Address     aabb.cc00.1000
+             Address     0008.302d.4580
              This bridge is the root
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-
   Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
-             Address     aabb.cc00.1000
+             Address     0008.302d.4580
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
              Aging Time  300 sec
-
 Interface           Role Sts Cost      Prio.Nbr Type
 ------------------- ---- --- --------- -------- --------------------------------
-Et0/1               Desg LIS 100       128.2    Shr
-Et0/3               Desg LIS 100       128.4    Shr
+Fa0/2               Desg FWD 19        128.2    P2p 
+Fa0/4               Desg FWD 19        128.4    P2p 
 ```
 
 Switch S2
 ``` bash
-S2#sh spann
-
+S2#show spanning-tree 
 VLAN0001
   Spanning tree enabled protocol ieee
   Root ID    Priority    32769
-             Address     aabb.cc00.1000
-             Cost        100
-             Port        2 (Ethernet0/1)
+             Address     0008.302d.4580
+             Cost        19
+             Port        4 (FastEthernet0/4)
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-
   Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
-             Address     aabb.cc00.2000
+             Address     0015.fac1.4500
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-             Aging Time  15  sec
-
-Interface           Role Sts Cost      Prio.Nbr Type
-------------------- ---- --- --------- -------- --------------------------------
-Et0/1               Root LRN 100       128.2    Shr
-Et0/3               Desg LRN 100       128.4    Shr
+             Aging Time 300
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/2            Altn BLK 19        128.2    P2p 
+Fa0/4            Root FWD 19        128.4    P2p 
+S2#
 ```
 
 Switch S3
 ``` bash
-S3#sh spann
-
+S3#show spanning-tree 
 VLAN0001
   Spanning tree enabled protocol ieee
   Root ID    Priority    32769
-             Address     aabb.cc00.1000
-             Cost        100
-             Port        4 (Ethernet0/3)
+             Address     0008.302d.4580
+             Cost        19
+             Port        4 (FastEthernet0/4)
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-
   Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
-             Address     aabb.cc00.3000
+             Address     0011.2142.4580
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-             Aging Time  15  sec
-
-Interface           Role Sts Cost      Prio.Nbr Type
-------------------- ---- --- --------- -------- --------------------------------
-Et0/1               Altn BLK 100       128.2    Shr
-Et0/3               Root FWD 100       128.4    Shr
+             Aging Time 300
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/2            Desg FWD 19        128.2    P2p 
+Fa0/4            Root FWD 19        128.4    P2p 
+S3#
 ```
 
 In the diagram below, recorded the Role and Status (Sts) of the active ports on each switch in the Topology
@@ -217,14 +211,15 @@ Why did spanning tree select this switch as the root bridge?
 > S1 was selected as  the root bridge based on the lowest MAC address. Since the sums of priotity bridge + vlan id values are the same on all switches, the MAC addresses are compared and the lowest one is selected.
 
 Which ports are the root ports on the switches?  
-> Порты, которые подключены к вышестоящему коммутатору. В данном случае те, которые подключены к корневому мосту. Обозначаются Root Fwd (root forward).
+> Ports that are connected to the superior switch. In this case, those that are connected to the root bridge. Root Fwd (root forward).
 > 
-> На S2 - e0/1
+> On S2 - f0/4
 > 
-> На S3 - e0/3
+> On S3 - f0/4
 
 Which ports are the designated ports on the switches? 
-> Порты, используемые для  пересылки данных, обозначаются Desg Fwd (designated forward)
+> Ports used for data transfer are designated Desg Fwd (designated forward) 
+These are f0/2 and f0/4 on S1, and f0/2 on S3
 
 What port is showing as an alternate port and is currently being blocked? 
 > Порт e0/1 коммутатора S3.
