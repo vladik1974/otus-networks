@@ -340,7 +340,7 @@ Why did spanning tree change the previously blocked port to a designated port, a
 
 *Step 4:	Remove port cost changes.*
 
-* Issue the _no spanning-tree cost 18_ interface configuration mode command to remove the cost statement that has been created earlier.
+* Issue the _no spanning-tree cost 18_ interface configuration mode command to remove the cost statement that has been created earlier.*
 ``` bash
 S2#configure terminal
 Enter configuration commands, one per line.  End with CNTL/Z.
@@ -349,7 +349,7 @@ S2(config-if)#no spanning-tree cost 18
 S2(config-if)#end
 ```
 
-* Re-issue the show spanning-tree command to verify that STP has reset the port on the non-root switches back to the original port settings.
+* Re-issue the show spanning-tree command to verify that STP has reset the port on the non-root switches back to the original port settings.*
 
 Switch S2
 ``` bash
