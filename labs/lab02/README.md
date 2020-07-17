@@ -1,4 +1,4 @@
-# Избыточность локальных сетей. STP
+# LANs Redundancy. STP
 # Lab №2. – Building a Switched Network with Redundant Links .
 
 ### Network Diagram
@@ -42,14 +42,14 @@ S1(config)#no ip domain-lookup
 S1(config)#exit
 S1#wr
 ```
-Назначить **class** в качестве зашифрованного пароля доступа к привилегированному режиму.
+Assigning **class** as the encrypted privileged EXEC mode password.
 ``` bash
 S1(config)#service password-encryption 
 S1(config)#enable secret class
 ```
 Assigning **cisco** as the console and vty passwords and enable login for console and vty lines. Configuring _logging synchronous_ for  console line. 
 
-assigning the password for  _console_
+Assigning the password for  _console_
 ``` bash
 S1(config)#line console 0
 S1(config-line)#password cisco
@@ -58,7 +58,7 @@ S1(config-line)#logging synchronous
 S1(config-line)#login
 S1(config-line)#exit
 ```
-assigning the password for  _vty lines_
+Assigning the password for  _vty lines_
 ``` bash
 S1(config)#line vty 0 15
 S1(config-line)#password cisco
@@ -68,11 +68,12 @@ S1(config-line)#login
 S1(config-line)#exit
 ```
 
-Настроить баннерное сообщение дня (MOTD) для предупреждения пользователей о запрете несанкционированного доступа.
+Configure a message of the day (MOTD) banner to warn users that unauthorized access is prohibited.
 ``` bash
-S1(config)#banner motd #Enter password for access#
+S1(config)#banner login #Unauthorized access is prohibited!!!#
 ```
-Задать IP-адрес, указанный в таблице адресации для VLAN 1 на всех коммутаторах.
+Configure the IP address listed in the Addressing Table for VLAN 1 on all switches
+and copy the running configuration to the startup configuration.
 ``` bash
 S1#conf t
 S1(config)#int vlan 1
@@ -80,7 +81,6 @@ S1(config)#ip address 192.168.1.1 255.255.255.0
 S1(config)#exit
 S1#copy running-config startup-config
 ```
-
 
 
 Аналогично настраиваем коммутаторы S2 и S3.
