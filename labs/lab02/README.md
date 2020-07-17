@@ -160,7 +160,7 @@ Et0/1               Desg LIS 100       128.2    Shr
 Et0/3               Desg LIS 100       128.4    Shr
 ```
 
-Коммутатор S2
+Switch S2
 ``` bash
 S2#sh spann
 
@@ -183,7 +183,7 @@ Et0/1               Root LRN 100       128.2    Shr
 Et0/3               Desg LRN 100       128.4    Shr
 ```
 
-Коммутатор S3
+Switch S3
 ``` bash
 S3#sh spann
 
@@ -206,30 +206,30 @@ Et0/1               Altn BLK 100       128.2    Shr
 Et0/3               Root FWD 100       128.4    Shr
 ```
 
-На схеме ниже записаны роли и состояние (Sts) активных портов на каждом коммутаторе в топологии.
+In the diagram below, recorded the Role and Status (Sts) of the active ports on each switch in the Topology
 ![](spanning-free.png)
 
-Ответы на вопросы:
-Какой коммутатор является корневым мостом?
-> корневым мостом является S1.
+Answers to the questions:
+Which switch is the root bridge? 
+> The root bridge is S1.
 
-Почему этот коммутатор был выбран протоколом spanning-tree в качестве корневого моста?
-> S1 был выбран корневым исходя из наименьшего значения MAC-адреса. Т.к.суммы значений priotity bridge + vlan id однаковы на всех коммутаторах, то сравниваются значения MAC-адресов и выбирается наименьший
+Why did spanning tree select this switch as the root bridge?
+> S1 was selected as  the root bridge based on the lowest MAC address. Since the sums of priotity bridge + vlan id values are the same on all switches, the MAC addresses are compared and the lowest one is selected.
 
-Какие порты на коммутаторе являются корневыми портами? 
+Which ports are the root ports on the switches?  
 > Порты, которые подключены к вышестоящему коммутатору. В данном случае те, которые подключены к корневому мосту. Обозначаются Root Fwd (root forward).
 > 
 > На S2 - e0/1
 > 
 > На S3 - e0/3
 
-Какие порты на коммутаторе являются назначенными портами?
+Which ports are the designated ports on the switches? 
 > Порты, используемые для  пересылки данных, обозначаются Desg Fwd (designated forward)
 
-Какой порт отображается в качестве альтернативного и в настоящее время заблокирован?
+What port is showing as an alternate port and is currently being blocked? 
 > Порт e0/1 коммутатора S3.
 
-Почему протокол spanning-tree выбрал этот порт в качестве невыделенного (заблокированного) порта?
+Why did spanning tree select this port as the non-designated (blocked) port?
 > После того, как выбран root bridge, S2 и S3 продолжут отправлять BPDU-пакеты от root bridge через все порты, кроме корневых (root fwd), изменив в них значения на свои (bringe id, port id,root path cost)
 > 
 >Получив пакеты BPDU друг от друга, увидели в них одинаковые значения root bridge, коммутаторы поймут, что есть избыточность (петля) и нужно заблокировать один из портов.
@@ -240,9 +240,9 @@ Et0/3               Root FWD 100       128.4    Shr
 >
 >Побеждает S2, т.к. у него меньший bridge id, соответственно порт e0/1 у S3 перестаёт отправлять любые пакеты и переходит в режит прослушивания BPDU пакетов от S2, т.е. переходит в режим blocked.
 
-#### Часть 3. Наблюдение за процессом выбора протоколом STP порта, исходя из стоимости портов
+#### Part 3:	Observe STP Port Selection Based on Port Cost
 
-*Шаг 1. Определить коммутатор с заблокированным портом.
+*Step 1:	Locate the switch with the blocked port.
 
 ``` bash
 S2#sh spann
@@ -288,19 +288,19 @@ Et0/3               Root FWD 100       128.4    Shr
 ```
 Заблокирован порт e0/1 на S3.
 
-*Шаг 2. Измените стоимость порта.*
+*Step 2:	Change port cost.*
 
-Уменьшить стоимость порта e0/3 корневого моста до 90:
+Lower the cost of this root port to 18 by issuing the *spanning-tree cost 18* interface configuration mode command.
 ``` bash
 S3#conf t
 S3(config)#int e0/3
-S3(config-if)#spanning-tree cost 90
+S3(config-if)#spanning-tree cost 18
 ```
-*Шаг 3. Просмотреть изменения протокола spanning-tree.*
+*Step 3:	Observe spanning tree changes.*
 
-Выполнить команду _show spanning-tree_ на обоих коммутаторах некорневого моста.
+Re-issuing the show spanning-tree command on both non-root switches.
 
-Коммутатор S2
+Switch S2
 ``` bash
 S2#sh spann
 
@@ -322,7 +322,7 @@ Interface           Role Sts Cost      Prio.Nbr Type
 Et0/1               Root FWD 100       128.2    Shr
 Et0/3               Altn BLK 100       128.4    Shr
 ```
-Коммутатор S3
+Switch S3
 ``` bash
 S3#sh spann
 
@@ -349,13 +349,13 @@ Et0/3               Root FWD 90        128.4    Shr
 Почему протокол spanning-tree заменяет ранее заблокированный порт на назначенный порт и блокирует порт, который был назначенным портом на другом коммутаторе?
 > Приоритет стоимости пути (Root Path Cost) имеет бОльший приоритет относительно SID и Port ID.
 
-*Шаг 4. Удалить изменения стоимости порта.*
+*Step 4:	Remove port cost changes.*
 
-* Вернём первоначальные настройки стоимости пути, выполнив команду _no spanning-tree cost 90_
+* Issue the _no spanning-tree cost 18_ interface configuration mode command to remove the cost statement that has been created earlier.
 ``` bash
 S3#conf t
-S3(config)#int e0/1
-S3(config-if)#no spanning-tree cost 90
+S3(config)#interface e0/1
+S3(config-if)#no spanning-tree cost 18
 ```
 
 * Повторно выполнить команду _show spanning-tree_, чтобы подтвердить, что протокол STP сбросил порт на коммутаторе некорневого моста, вернув исходные настройки порта.
