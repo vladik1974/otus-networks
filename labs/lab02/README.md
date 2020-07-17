@@ -17,21 +17,21 @@ S3 | VLAN 1 | 192.168.1.3 | 255.255.255.0
 #### [Part 2:	Determine the Root Bridge](README.md#часть-2-выбор-корневого-моста-1)
 #### [Part 3:	Observe STP Port Selection Based on Port Cost](README.md#часть-3-наблюдение-за-процессом-выбора-протоколом-stp-порта-исходя-из-стоимости-портов-1)
 #### [Part 4:	Observe STP Port Selection Based on Port Priority](README.md#часть-4-наблюдение-за-процессом-выбора-протоколом-stp-порта-исходя-из-приоритета-портов-1)
-#### [Вопросы для повторения](README.md#вопросы-для-повторения-1)
-#### [Конфигурационные файлы ](README.md#конфигурационные-файлы-здесь)
+#### [Reflection](README.md#вопросы-для-повторения-1)
+#### [Configuration files ](README.md#конфигурационные-файлы-здесь)
 
-### Решение:
-#### Часть 1. Создание сети и настройка основных параметров устройства
+### Solution:
+#### Part 1. Build the Network and Configure Basic Device Settings
 
-*Шаг 1: Создать сеть согласно топологии.*
+*Step 1:	Cable the network as shown in the topology.*
 
-Подключили устройства, как показано в топологии, и подсоединили необходимые кабели.
+Attaching the devices as shown in the topology diagram, and cable as necessary.
 
 ![](network_lab03_eve.png)
 
-*Шаг 2. Выполнить инициализацию и перезагрузку коммутаторов.*
+*Step 2. Initialize and reload the switches as necessary.*
 
-*Шаг 3. Настроить базовые параметры каждого коммутатора.*
+*Step 3. Configure basic settings for each switch..*
   
 Пример для S1
 
@@ -481,17 +481,17 @@ Et0/3               Altn BLK 100       128.4    Shr
 
 ________________________
 
-#### Вопросы для повторения
+#### 	Reflection
 
-  1. Какое значение протокол STP использует первым после выбора корневого моста, чтобы определить выбор порта?
+  1. After a root bridge has been selected, what is the first value STP uses to determine port selection?
         > - Root Path Cost.
 
 
-  2. Если первое значение на двух портах одинаково, какое следующее значение будет использовать протокол STP при выборе порта?
+  2. If the first value is equal on the two ports, what is the next value that STP uses to determine port selection?
         > - Bridge ID.
 
-  3. Если оба значения на двух портах равны, каким будет следующее значение, которое использует протокол STP при выборе порта?
+  3. If both values are equal on the two ports, what is the next value that STP uses to determine port selection?
         > - Port ID.
 
 
-#### Конфигурационные файлы [зде
+#### Configuration files [зде
