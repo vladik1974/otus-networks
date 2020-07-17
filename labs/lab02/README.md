@@ -12,7 +12,7 @@ S1 | VLAN 1 | 192.168.1.1 | 255.255.255.0
 S2 | VLAN 1 | 192.168.1.2 | 255.255.255.0
 S3 | VLAN 1 | 192.168.1.3 | 255.255.255.0
 
-### Задание:
+### The Task:
 #### [Part 1:	Build the Network and Configure Basic Device Settings](README.md#часть-1-создание-сети-и-настройка-основных-параметров-устройства-1)
 #### [Part 2:	Determine the Root Bridge](README.md#часть-2-выбор-корневого-моста-1)
 #### [Part 3:	Observe STP Port Selection Based on Port Cost](README.md#часть-3-наблюдение-за-процессом-выбора-протоколом-stp-порта-исходя-из-стоимости-портов-1)
@@ -33,9 +33,9 @@ Attaching the devices as shown in the topology diagram, and cable as necessary.
 
 *Step 3. Configure basic settings for each switch..*
   
-Пример для S1
+Example for S1
 
-Отключить поиск DNS и присвоить имена устройствам в соответствии с топологией.
+Disabling DNS lookup and configuring the device name according to the topology.
 ``` bash
 Switch(config)#hostname S1
 S1(config)#no ip domain-lookup
@@ -47,22 +47,22 @@ S1#wr
 S1(config)#service password-encryption 
 S1(config)#enable secret class
 ```
-Назначить **cisco** в качестве паролей консоли и VTY и активируйте вход для консоли и VTY каналов. Настроить _logging synchronous_ для консольного канала. Настроить автовыход при бездействии 5 минут. 
+Assigning **cisco** as the console and vty passwords and enable login for console and vty lines. Configuring _logging synchronous_ for  console line. 
 
-назначение пароля для _console_
+assigning the password for  _console_
 ``` bash
 S1(config)#line console 0
 S1(config-line)#password cisco
-S1(config-line)#exec-timeout 5 0 
+S1(config-line)#exec-timeout 0 0 
 S1(config-line)#logging synchronous
 S1(config-line)#login
 S1(config-line)#exit
 ```
-назначение пароля для _telnet_
+assigning the password for  _vty lines_
 ``` bash
-S1(config)#line vty 0 4
+S1(config)#line vty 0 15
 S1(config-line)#password cisco
-S1(config-line)#exec-timeout 5 0 
+S1(config-line)#exec-timeout 0 0 
 S1(config-line)#logging synchronous
 S1(config-line)#login
 S1(config-line)#exit
