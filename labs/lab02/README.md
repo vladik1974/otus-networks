@@ -117,17 +117,17 @@ S1(config)#int range f0/1 - 4
 S1(config-if-range)#switchport mode trunk
 S1(config-if-range)#
 ```
-*Шаг 3. Включите порты e0/1 и e0/3 на всех коммутаторах.*
+*Step 3.	Activate ports F0/2 and F0/4 on all switches.*
 
 Example on S1. In the same way, on S2 and S3.
 ``` bash
-S1#conf t
-S1(config)#int range e0/1,e0/3
-S1(config-if-range)#no shut
+S1#configure terminal
+S1(config)#interface range f0/2, f0/4
+S1(config-if-range)#no shutdown
 ```
-Проверка активации портов
+Verifying ports activation
 ``` bash
-S1#sh int status
+S1#show interface status
 ```
 ``` bash
 Port      Name               Status       Vlan       Duplex  Speed Type
@@ -136,11 +136,11 @@ Et0/1                        connected    trunk        auto   auto unknown
 Et0/2                        disabled     1            auto   auto unknown
 Et0/3                        connected    trunk        auto   auto unknown
 ```
-*Шаг 4. Отобразите данные протокола spanning-tree.*
+*Step 4: Display spanning tree information.*
 
-Коммутатор S1
+Switch S1
 ``` bash
-S1#sh spann
+S1#show spanning-tree
 
 VLAN0001
   Spanning tree enabled protocol ieee
