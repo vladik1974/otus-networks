@@ -393,77 +393,76 @@ Fa0/4            Root FWD 19        128.4    P2p
 S3#
 ```
 
-#### Часть 4. Наблюдение за процессом выбора протоколом STP порта, исходя из приоритета портов
+#### Part 4:	Observing STP Port Selection Based on Port Priority
 
-* Включите порты F0/1 и F0/3 на всех коммутаторах.
+* Activating ports F0/1 and F0/3 on all switches.
 
-Пример для коммутатора S1. Для S2 и S3 аналогичные настройки.
+Example for switch S1. For S2 и S3 the same settings has been applied.
 ``` bash
-S1#conf t
-S1(config)#int range e0/0,e0/2
-S1(config-if-range)#no shut
+S1#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+S1(config)#interface range f0/1 , f0/3
+S1(config-if-range)#no shutdown
 ```
 
-* Выполнить команду _show spanning-tree_ на коммутаторах некорневого моста.
+* Waiting 30 seconds for STP to complete the port transition process, and then issuing the _show spanning-tree_ command on the non-root switches.
+* Observing that the root port has moved to the lower numbered port linked to the root switch, and blocked the previous root port.
 
+Switch S2
 ``` bash
-S2#sh spann
-
+S2#show spanning-tree 
 VLAN0001
   Spanning tree enabled protocol ieee
   Root ID    Priority    32769
-             Address     aabb.cc00.1000
-             Cost        100
-             Port        1 (Ethernet0/0)
+             Address     0008.302d.4580
+             Cost        19
+             Port        3 (FastEthernet0/3)
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-
   Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
-             Address     aabb.cc00.2000
+             Address     0015.fac1.4500
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-             Aging Time  15  sec
-
-Interface           Role Sts Cost      Prio.Nbr Type
-------------------- ---- --- --------- -------- --------------------------------
-Et0/0               Root FWD 100       128.1    Shr
-Et0/1               Altn BLK 100       128.2    Shr
-Et0/2               Desg FWD 100       128.3    Shr
-Et0/3               Desg FWD 100       128.4    Shr
+             Aging Time 300
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/1            Altn BLK 19        128.1    P2p 
+Fa0/2            Altn BLK 19        128.2    P2p 
+Fa0/3            Root FWD 19        128.3    P2p 
+Fa0/4            Altn BLK 19        128.4    P2p 
+S2#
 ```
 
-Коммутатор S3
+Switch S3
 ``` bash
-S3#sh spann
-
+S3#show spanning-tree 
 VLAN0001
   Spanning tree enabled protocol ieee
   Root ID    Priority    32769
-             Address     aabb.cc00.1000
-             Cost        100
-             Port        3 (Ethernet0/2)
+             Address     0008.302d.4580
+             Cost        19
+             Port        3 (FastEthernet0/3)
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-
   Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)
-             Address     aabb.cc00.3000
+             Address     0011.2142.4580
              Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
-             Aging Time  15  sec
-
-Interface           Role Sts Cost      Prio.Nbr Type
-------------------- ---- --- --------- -------- --------------------------------
-Et0/0               Altn BLK 100       128.1    Shr
-Et0/1               Altn BLK 100       128.2    Shr
-Et0/2               Root FWD 100       128.3    Shr
-Et0/3               Altn BLK 100       128.4    Shr
+             Aging Time 300
+Interface        Role Sts Cost      Prio.Nbr Type
+---------------- ---- --- --------- -------- --------------------------------
+Fa0/1            Desg FWD 19        128.1    P2p 
+Fa0/2            Desg FWD 19        128.2    P2p 
+Fa0/3            Root FWD 19        128.3    P2p 
+Fa0/4            Altn BLK 19        128.4    P2p 
+S3#
 ```
 
-Какой порт выбран протоколом STP в качестве порта корневого моста на каждом коммутаторе некорневого моста?
-> На S2 e0/0
+What port did STP select as the root port on each non-root switch? 
+> On S2 Fa0/3
 > 
-> На S3 e0/2
+> On S3 Fa0/3
 > 
-Почему протокол STP выбрал эти порты в качестве портов корневого моста на этих коммутаторах?
+Why did STP select these ports as the root port on these switches?
 
-> На коммутаторе S2 на _root bridge_ смотрят два порта, _e0/0_ и _e0/1_. В качестве _root fwd_ выбран порт _e0/0_ из-за наименьшего _port id_.
-> На коммутаторе S3 на _root bridge_ смотрят _e0/2_ и _e0/3_. Наименьший _port id_ у порта _e0/2_.
+> On switch S2, two ports, _Fa0/3_ and _Fa0/4_, look at _root bridge_. _Fa0/3_ is selected as _root fwd_ due to the lowest _port id_.
+> On switch S3, _Fa0/3_ and _Fa0/4_ are looking at _root bridge_. Port Fa0/3 have the lowest _port id_
 
 ________________________
 
