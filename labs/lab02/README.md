@@ -70,7 +70,7 @@ S1(config-line)#exit
 
 Configure a message of the day (MOTD) banner to warn users that unauthorized access is prohibited.
 ``` bash
-S1(config)#banner login #Unauthorized access is prohibited!!!#
+S1(config)#banner motd #Unauthorized access is prohibited!!!#
 ```
 Configure the IP address listed in the Addressing Table for VLAN 1 on all switches
 and copy the running configuration to the startup configuration.
@@ -78,49 +78,48 @@ and copy the running configuration to the startup configuration.
 S1#conf t
 S1(config)#int vlan 1
 S1(config)#ip address 192.168.1.1 255.255.255.0
+S1(config)#no shutdown
 S1(config)#exit
 S1#copy running-config startup-config
 ```
 
 
-Аналогично настраиваем коммутаторы S2 и S3.
+In the same way, configuring  S2 и S3 switches.
 
-*Шаг 4. Проверить связь.*
+*Step 4. Testing connectivity.*
 
-Проверть способность компьютеров обмениваться эхо-запросами.
-Успешно ли выполняется эхо-запрос от коммутатора S1 на коммутатор S2?
+Verify that the switches can ping one another.
+Can S1 ping S2?
 
-Успешно ли выполняется эхо-запрос от коммутатора S1 на коммутатор S3?
+Can S1 ping S3?
 
-Успешно ли выполняется эхо-запрос от коммутатора S2 на коммутатор S3?
+Can S2 ping S3?
 
-Выполняйте отладку до тех пор, пока ответы на все вопросы не будут положительными.
+Troubleshoot until you are able to answer yes to all questions.
 
-Ответ: Чтобы проходили пинги, необходимо включить (активировать) интерфейсы Vlan1 и порты с e0/0 по e0/3 на всех коммутаторах.
+The answer: In order the switches can ping one another,  interface Vlan1 and  ports  F0/1 - F0/4 should be activated on all switches.
 
-#### Часть 2. Выбор корневого моста
+#### Part 2:	Determine the Root Bridge
 
-*Шаг 1. Отключите все порты на коммутаторах.*
+*Step 1. Deactivate all ports on the switches.*
 
-Пример на S1. На S2, S3 аналогично.
+Example on S1. In the same way on S2 and S3 
 ``` bash
 S1#conf t
-S1(config)#int range e0/0-3
-S1(config-if-range)#shut
+S1(config)#interface range f0/1 - 24, G0/1 - 2
+S1(config-if-range)#shutdown
 ```
-*Шаг 2. Настройте подключенные порты в качестве транковых.*
+*Step 2:	Configure connected ports as trunks.*
 
-Пример на S1. На S2, S3 аналогично.
+Example on S1. In the same way, on S2 and S3.
 ``` bash
-S1(config)#int range e0/0-3
-S1(config-if-range)#swit
-S1(config-if-range)#switchport trunk encapsulation dot1q
+S1(config)#int range f0/1 - 4
 S1(config-if-range)#switchport mode trunk
 S1(config-if-range)#
 ```
 *Шаг 3. Включите порты e0/1 и e0/3 на всех коммутаторах.*
 
-Пример на S1. На S2, S3 аналогично.
+Example on S1. In the same way, on S2 and S3.
 ``` bash
 S1#conf t
 S1(config)#int range e0/1,e0/3
