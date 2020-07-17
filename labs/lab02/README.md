@@ -3,7 +3,7 @@
 
 ### Network Diagram
 
-![](network.jpg)
+![](logical_network_topology.png)
 
 ### 	Addressing Table
 Device | Interface | IP Address | Subnet Mask
