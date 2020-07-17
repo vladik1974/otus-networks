@@ -88,7 +88,7 @@ In the same way, configuring  S2 и S3 switches.
 
 *Step 4. Testing connectivity.*
 
-Verify that the switches can ping one another.
+Verify that the switches can ping one another.<br/>
 Can S1 ping S2?
 
 Can S1 ping S3?
