@@ -27,7 +27,7 @@ S3 | VLAN 1 | 192.168.1.3 | 255.255.255.0
 
 Attaching the devices as shown in the topology diagram, and cable as necessary.
 
-![](network_lab03_eve.png)
+![](physical_network_topology.jpeg)
 
 *Step 2. Initialize and reload the switches as necessary.*
 
