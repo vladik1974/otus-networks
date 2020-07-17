@@ -461,7 +461,7 @@ What port did STP select as the root port on each non-root switch?
 > 
 Why did STP select these ports as the root port on these switches?
 
-> On switch S2, two ports, _Fa0/3_ and _Fa0/4_, look at _root bridge_. _Fa0/3_ is selected as _root fwd_ due to the lowest _port id_.
+> On switch S2, two ports, _Fa0/3_ and _Fa0/4_, look at _root bridge_. _Fa0/3_ is selected as _root fwd_ due to the lowest _port id_.<br/>
 > On switch S3, _Fa0/3_ and _Fa0/4_ are looking at _root bridge_. Port Fa0/3 have the lowest _port id_
 
 ________________________
